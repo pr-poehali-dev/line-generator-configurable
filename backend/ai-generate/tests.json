@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Empty phrases returns 400",
+      "method": "POST",
+      "path": "/",
+      "body": {"phrases": [], "count": 5},
+      "expectedStatus": 400,
+      "expectedBody": {"error": "Нет фраз для обработки"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
