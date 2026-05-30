@@ -6,11 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Icon from "@/components/ui/icon";
 import Generator from "./pages/Generator";
 import Upload from "./pages/Upload";
-import AiGenerator from "./pages/AiGenerator";
 
 const queryClient = new QueryClient();
 
-type Tab = "generator" | "ai" | "upload";
+type Tab = "generator" | "upload";
 
 const App = () => {
   const [tab, setTab] = useState<Tab>("generator");
@@ -46,7 +45,6 @@ const App = () => {
               <nav className="flex items-stretch h-full">
                 {([
                   { id: "generator", label: "Генератор", icon: "Zap" },
-                  { id: "ai", label: "ИИ", icon: "Sparkles" },
                   { id: "upload", label: "Загрузка", icon: "Upload" },
                 ] as { id: Tab; label: string; icon: string }[]).map(({ id, label, icon }) => (
                   <button
@@ -55,20 +53,13 @@ const App = () => {
                     className={`
                       flex items-center gap-2 px-5 py-4 text-sm font-semibold transition-all duration-200 border-b-2 relative
                       ${tab === id
-                        ? id === "ai"
-                          ? "text-white border-pink-400"
-                          : "text-white border-purple-400"
+                        ? "text-white border-purple-400"
                         : "text-muted-foreground border-transparent hover:text-white hover:border-white/20"
                       }
                     `}
                   >
-                    <Icon name={icon} fallback="Circle" size={15} className={tab === id && id === "ai" ? "text-pink-400" : ""} />
+                    <Icon name={icon} fallback="Circle" size={15} />
                     {label}
-                    {id === "ai" && (
-                      <span className="ml-0.5 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-pink-500/25 to-purple-500/25 border border-pink-500/30 text-[9px] text-pink-300 font-bold uppercase tracking-wider leading-none">
-                        NEW
-                      </span>
-                    )}
                     {id === "upload" && lines.length > 0 && (
                       <span className="ml-1 w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-slow" />
                     )}
@@ -91,7 +82,6 @@ const App = () => {
           {/* Page content */}
           <main className="flex-1">
             {tab === "generator" && <Generator lines={lines} fileName={fileName} />}
-            {tab === "ai" && <AiGenerator lines={lines} fileName={fileName} />}
             {tab === "upload" && (
               <Upload
                 onFileLoaded={handleFileLoaded}
