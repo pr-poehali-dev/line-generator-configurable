@@ -125,32 +125,7 @@ export default function AiGenerator({ lines, fileName }: AiGeneratorProps) {
               />
             </div>
 
-            {/* Generate button */}
-            <button
-              onClick={generate}
-              disabled={!hasFile || status === "loading"}
-              className={`
-                w-full py-4 rounded-2xl font-display text-lg font-semibold uppercase tracking-wider transition-all duration-300
-                ${hasFile && status !== "loading"
-                  ? "bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-500 text-white hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(236,72,153,0.45)] active:scale-[0.98]"
-                  : "bg-white/5 text-muted-foreground cursor-not-allowed"
-                }
-              `}
-            >
-              <span className="flex items-center justify-center gap-2">
-                {status === "loading" ? (
-                  <>
-                    <Icon name="Loader2" size={20} className="animate-spin" />
-                    ИИ думает...
-                  </>
-                ) : (
-                  <>
-                    <Icon name="Sparkles" size={20} />
-                    Создать с ИИ
-                  </>
-                )}
-              </span>
-            </button>
+
 
             {/* How it works */}
             <div className="glass rounded-2xl p-4 space-y-2.5">
